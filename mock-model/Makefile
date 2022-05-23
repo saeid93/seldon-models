@@ -51,6 +51,12 @@ local-metrics:
 	curl -s localhost:${METRICS_SERVICE_PORT}/metrics
 
 
+vegeta:
+	python3 generate-vegeta-json.py && \
+	vegeta attack -targets=vegeta-target.json -rate=1 -duration=10s -format=json -max-workers=${WORKERS} && \
+	rm vegeta-target.json
+
+
 
 ##################### IMAGE BUILD / PUSH  / LOAD ###########################
 

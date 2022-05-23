@@ -1,0 +1,2 @@
+{"method": "POST", "header": {"Content-Type": ["application/json"]}, "url": "http://localhost:9000/api/v1.0/predictions", "body": "eyJtZXRhIjogeyJ0YWdzIjogeyJzb21lIjogInRhZyJ9fSwgImRhdGEiOiB7Im5hbWVzIjogWyJhIiwgImIiLCAiYyJdLCAibmRhcnJheSI6IFtbMSwgMiwgM11dfX0="}
+
