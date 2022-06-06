@@ -4,8 +4,10 @@ SELDON_CORE_DIR ?= ${HOME}/work/seldon-core
 LOCALHOST_PORT ?= 5000
 ISTIO_PORT ?= 8003
 
+LATEST_TAG ?= latest
+
 IMAGE_NAME ?= rafalskolasinski/mock-model
-IMAGE_VERSION ?= latest
+IMAGE_VERSION ?= ${LATEST_TAG}
 
 BASE_IMAGE_NAME ?= seldonio/seldon-core-s2i-python38
 BASE_IMAGE_VERSION ?= 1.13.1
@@ -55,13 +57,11 @@ local-metrics:
 ##################### IMAGE BUILD / PUSH  / LOAD ###########################
 
 image:
-	docker build --build-arg BASE_IMAGE=${BASE_IMAGE} -t ${IMAGE_NAME}:${IMAGE_VERSION} .
-
-	docker tag ${IMAGE_NAME}:${IMAGE_VERSION} ${IMAGE_NAME}:${BASE_IMAGE_VERSION}
+	docker build --build-arg BASE_IMAGE=${BASE_IMAGE} -t ${IMAGE_NAME}:${LATEST_TAG} .
 
 push: image
+	docker tag ${IMAGE_NAME}:${LATEST_TAG} ${IMAGE_NAME}:${IMAGE_VERSION}
 	docker push ${IMAGE_NAME}:${IMAGE_VERSION}
-	docker push ${IMAGE_NAME}:${BASE_IMAGE_VERSION}
 
 kind: image
 	kind load docker-image ${IMAGE_NAME}:${IMAGE_VERSION} --name ${KIND_NAME}

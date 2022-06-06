@@ -19,10 +19,22 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build Docker Images using Makefile
+      - name: Build and push latest image
         working-directory: ./mock-model
-        run: make image
+        run: make image push
 
-      - name: Push Docker Images using Makefile
+      - name: Build and push current dev
         working-directory: ./mock-model
-        run: make push
+        run: BASE_IMAGE_VERSION=1.14.0-dev IMAGE_VERSION=1.14.0-dev make image push
+
+      - name: Build and push 1.13.1
+        working-directory: ./mock-model
+        run: BASE_IMAGE_VERSION=1.13.1 IMAGE_VERSION=1.13.1 make image push
+
+      - name: Build and push 1.12.0
+        working-directory: ./mock-model
+        run: BASE_IMAGE_VERSION=1.12.0 IMAGE_VERSION=1.12.0 make image push
+
+      - name: Build and push 1.11.2
+        working-directory: ./mock-model
+        run: BASE_IMAGE_VERSION=1.11.2 IMAGE_VERSION=1.11.2 make image push
