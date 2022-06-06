@@ -57,8 +57,11 @@ local-metrics:
 image:
 	docker build --build-arg BASE_IMAGE=${BASE_IMAGE} -t ${IMAGE_NAME}:${IMAGE_VERSION} .
 
+	docker tag ${IMAGE_NAME}:${IMAGE_VERSION} ${IMAGE_NAME}:${BASE_IMAGE_VERSION}
+
 push: image
 	docker push ${IMAGE_NAME}:${IMAGE_VERSION}
+	docker push ${IMAGE_NAME}:${BASE_IMAGE_VERSION}
 
 kind: image
 	kind load docker-image ${IMAGE_NAME}:${IMAGE_VERSION} --name ${KIND_NAME}
