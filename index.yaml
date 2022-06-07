@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  mock-model:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2022-06-07T15:36:19.703154379+01:00"
+    description: Chart to deploy Seldon Mock Model
+    digest: 6f160f2173cc92964ea18df99fc76e30c9442db2cf9758b634a0138286c110f3
+    name: mock-model
+    type: application
+    urls:
+    - https://rafalskolasinski.github.io/seldon-models/mock-model-0.1.0.tgz
+    version: 0.1.0
+generated: "2022-06-07T15:36:19.702598845+01:00"
