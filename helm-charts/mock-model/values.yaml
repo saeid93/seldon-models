@@ -1,0 +1,6 @@
+namespace: seldon
+replicas: 1
+version: latest
+
+nameOverride: ""
+fullnameOverride: ""

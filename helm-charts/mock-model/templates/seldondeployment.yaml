@@ -1,0 +1,21 @@
+apiVersion: machinelearning.seldon.io/v1
+kind: SeldonDeployment
+metadata:
+  name: {{ include "mock-model.fullname" . }}
+  namespace: {{ .Values.namespace }}
+spec:
+  predictors:
+  - name: default
+    replicas: {{ .Values.replicas }}
+    componentSpecs:
+    - spec:
+        containers:
+        - image: rafalskolasinski/mock-model:{{ .Values.version }}
+          imagePullPolicy: IfNotPresent
+          name: mock-model
+          env:
+          - name: SELDON_LOG_LEVEL
+            value: DEBUG
+    graph:
+      type: MODEL
+      name: mock-model
