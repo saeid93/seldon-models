@@ -14,7 +14,11 @@ spec:
           name: mock-model
           env:
           - name: SELDON_LOG_LEVEL
-            value: DEBUG
+            value: {{ .Values.server.logLevel | upper | quote }}
+          - name: GUNICORN_WORKERS
+            value: {{ .Values.server.workers | quote }}
+          - name: GUNICORN_THREADS
+            value: {{ .Values.server.threads | quote }}
     graph:
       type: MODEL
       name: mock-model
