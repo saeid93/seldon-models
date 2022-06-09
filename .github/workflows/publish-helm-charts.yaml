@@ -1,4 +1,4 @@
-name: Local Test with Act
+name: Release chart (external repo)
 
 on:
   workflow_dispatch:
