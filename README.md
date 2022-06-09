@@ -7,7 +7,7 @@ Collection of Seldon Models. Mostly for testing and development purposes.
 
 ### Mock Model
 
-A simple generic [mock model](./mock-model. Images hosted on [DockerHub](https://hub.docker.com/r/rafalskolasinski/mock-model/tags).
+A simple generic [mock model](./mock-model). Images hosted on [DockerHub](https://hub.docker.com/r/rafalskolasinski/mock-model/tags).
 
 
 ## Helm Charts
