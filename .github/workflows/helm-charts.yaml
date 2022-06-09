@@ -32,33 +32,3 @@ jobs:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         with:
           charts_dir: helm-charts
-
-  release-to-test-charts:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
-      - name: Configure Git
-        run: |
-          git config user.name "morda-bot"
-          git config user.email "morda-bot@users.noreply.github.com"
-
-      - name: Install Helm
-        uses: azure/setup-helm@v1
-        with:
-          version: v3.8.1
-
-      - name: Run chart-releaser (to other repo)
-        uses: helm/chart-releaser-action@v1.4.0
-        env:
-          CR_TOKEN: "${{ secrets.MORDA_BOT_TOKEN }}"
-          CR_OWNER: rafalskolasinski
-          CR_GIT_REPO: test-helm-charts
-        with:
-          charts_dir: helm-charts
-          charts_repo_url: https://rafalskolasinski.github.io/test-helm-charts

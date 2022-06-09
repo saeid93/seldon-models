@@ -1,0 +1,54 @@
+name: Local Test with Act
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version of helm chart to be used both for version and appVersion fields'
+        required: true
+
+env:
+  GITHUB_USER: morda-bot
+
+  GITHUB_OWNER: rafalskolasinski
+  GITHUB_PROJECT: helm-charts
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Configure Git
+        run: |
+          git config --global user.name "${GITHUB_USER}"
+          git config --global user.email "${GITHUB_USER}@users.noreply.github.com"
+
+      - name: Install Helm
+        uses: azure/setup-helm@v1
+        with:
+          version: v3.8.1
+
+      - name: Prepare output repository
+        run: |
+          rm -rf .gh-pages
+          git clone https://${{ secrets.MORDA_BOT_TOKEN }}@github.com/${GITHUB_OWNER}/${GITHUB_PROJECT}.git -b gh-pages .gh-pages
+
+      - name: Build and index helm chart
+        run: |
+          rm -rf .build-chart
+          mkdir .build-chart
+
+          helm package helm-charts/mock-model -d .build-chart --version ${{ github.event.inputs.version }} --app-version ${{ github.event.inputs.version }}
+          helm repo index .build-chart --url https://${GITHUB_OWNER}.github.io/${GITHUB_PROJECT} --merge .gh-pages/index.yaml
+
+      - name: Publish new helm chart
+        run: |
+          mv .build-chart/* .gh-pages/ && cd .gh-pages
+          git add .
+          git commit -m 'Publishing new helm chart'
+          git push
