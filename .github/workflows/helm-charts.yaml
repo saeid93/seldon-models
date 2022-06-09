@@ -32,3 +32,12 @@ jobs:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
         with:
           charts_dir: helm-charts
+
+      - name: Run chart-releaser (to other repo)
+        uses: helm/chart-releaser-action@v1.4.0
+        env:
+          CR_TOKEN: "${{ secrets.MORDA_BOT_TOKEN }}"
+          CR_OWNER: rafalskolasinski
+          CR_GIT_REPO: test-helm-charts
+        with:
+          charts_dir: helm-charts
