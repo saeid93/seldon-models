@@ -61,3 +61,4 @@ jobs:
           CR_GIT_REPO: test-helm-charts
         with:
           charts_dir: helm-charts
+          charts_repo_url: https://rafalskolasinski.github.io/test-helm-charts
