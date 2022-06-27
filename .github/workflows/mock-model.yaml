@@ -9,6 +9,14 @@ on:
 jobs:
   mock-model:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        base:
+        - "1.11.2"
+        - "1.12.0"
+        - "1.13.1"
+        - "1.14.0"
+        - "1.15.0-dev"
     steps:
       - name: Checkout Git Commit
         uses: actions/checkout@v3
@@ -23,22 +31,6 @@ jobs:
         working-directory: ./mock-model
         run: make image push
 
-      - name: Build and push current dev
+      - name: Build and push image
         working-directory: ./mock-model
-        run: BASE_IMAGE_VERSION=1.15.0-dev IMAGE_VERSION=1.15.0-dev make image push
-
-      - name: Build and push 1.14.0
-        working-directory: ./mock-model
-        run: BASE_IMAGE_VERSION=1.14.0 IMAGE_VERSION=1.14.0 make image push
-
-      - name: Build and push 1.13.1
-        working-directory: ./mock-model
-        run: BASE_IMAGE_VERSION=1.13.1 IMAGE_VERSION=1.13.1 make image push
-
-      - name: Build and push 1.12.0
-        working-directory: ./mock-model
-        run: BASE_IMAGE_VERSION=1.12.0 IMAGE_VERSION=1.12.0 make image push
-
-      - name: Build and push 1.11.2
-        working-directory: ./mock-model
-        run: BASE_IMAGE_VERSION=1.11.2 IMAGE_VERSION=1.11.2 make image push
+        run: BASE_IMAGE_VERSION=${{ matrix.base }} IMAGE_VERSION=${{ matrix.base }} make image push
