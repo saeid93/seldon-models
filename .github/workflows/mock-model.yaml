@@ -25,7 +25,11 @@ jobs:
 
       - name: Build and push current dev
         working-directory: ./mock-model
-        run: BASE_IMAGE_VERSION=1.14.0-dev IMAGE_VERSION=1.14.0-dev make image push
+        run: BASE_IMAGE_VERSION=1.15.0-dev IMAGE_VERSION=1.15.0-dev make image push
+
+      - name: Build and push 1.14.0
+        working-directory: ./mock-model
+        run: BASE_IMAGE_VERSION=1.14.0 IMAGE_VERSION=1.14.0 make image push
 
       - name: Build and push 1.13.1
         working-directory: ./mock-model

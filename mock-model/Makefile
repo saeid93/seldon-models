@@ -10,7 +10,7 @@ IMAGE_NAME ?= rafalskolasinski/mock-model
 IMAGE_VERSION ?= ${LATEST_TAG}
 
 BASE_IMAGE_NAME ?= seldonio/seldon-core-s2i-python38
-BASE_IMAGE_VERSION ?= 1.13.1
+BASE_IMAGE_VERSION ?= 1.14.0
 
 BASE_IMAGE ?= ${BASE_IMAGE_NAME}:${BASE_IMAGE_VERSION}
 
