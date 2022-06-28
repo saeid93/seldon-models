@@ -1,0 +1,14 @@
+apiVersion: machinelearning.seldon.io/v1
+kind: SeldonDeployment
+metadata:
+  name: v2-sklearn-mnist
+spec:
+  protocol: v2
+  predictors:
+  - name: default
+    replicas: 1
+    graph:
+      name: mnist-svm
+      implementation: SKLEARN_SERVER
+      modelUri: minio:v2-sklearn-mnist
+      envSecretRefName: seldon-rclone-secret
