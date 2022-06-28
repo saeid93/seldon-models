@@ -1,3 +1,15 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: test-secret
+  namespace: seldon
+type: Opaque
+stringData:
+  TEST_MOCK_SECRET: Test mock secret value is here
+
+
+---
+
 apiVersion: machinelearning.seldon.io/v1
 kind: SeldonDeployment
 metadata:
@@ -16,6 +28,9 @@ spec:
           env:
           - name: SELDON_LOG_LEVEL
             value: DEBUG
+          envFrom:
+          - secretRef:
+              name: test-secret
     graph:
       type: MODEL
       name: mock-model

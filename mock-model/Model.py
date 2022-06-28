@@ -9,6 +9,8 @@ METRICS_TAGS = {"foo": "bar"}
 
 
 class Model:
+    def __init__(self):
+        logging.info(f"Test secret: {os.environ.get('TEST_MOCK_SECRET', None)}")
 
     def predict(self, features, names=None, meta=None):
 
