@@ -22,3 +22,7 @@ spec:
     graph:
       type: MODEL
       name: mock-model
+      {{- if .Values.enableLogging }}
+      logger:
+        mode: all
+      {{- end}}

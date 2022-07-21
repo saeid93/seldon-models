@@ -9,3 +9,5 @@ server:
   workers: 1
   threads: 1
   logLevel: debug
+
+enableLogging: false
