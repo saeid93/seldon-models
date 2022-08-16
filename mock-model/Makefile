@@ -7,7 +7,7 @@ IMAGE_NAME ?= rafalskolasinski/mock-model
 IMAGE_VERSION ?= ${LATEST_TAG}
 
 BASE_IMAGE_NAME ?= seldonio/seldon-core-s2i-python38
-BASE_IMAGE_VERSION ?= 1.14.0
+BASE_IMAGE_VERSION ?= 1.14.1
 
 BASE_IMAGE ?= ${BASE_IMAGE_NAME}:${BASE_IMAGE_VERSION}
 
@@ -64,6 +64,12 @@ push: image
 kind: image
 	kind load docker-image ${IMAGE_NAME}:${IMAGE_VERSION} --name ${KIND_NAME}
 
+docker-serve:
+	docker rm -f mock-model || echo "Already removed"
+	docker run --rm -it --name "mock-model" \
+		-p 127.0.0.1:${HTTP_SERVICE_PORT}:9000 \
+		-p 127.0.0.1:${GRPC_SERVICE_PORT}:5000 \
+		${IMAGE_NAME}:${LATEST_TAG}
 
 
 ############################## K8s TESTING #################################
