@@ -10,4 +10,12 @@ server:
   threads: 1
   logLevel: debug
 
+  resources:
+    limits:
+      cpu: 500m
+      memory: 1Gi
+    requests:
+      cpu: 100m
+      memory: 1Gi
+
 enableLogging: false
