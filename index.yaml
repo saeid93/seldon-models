@@ -3,6 +3,16 @@ entries:
   mock-model:
   - apiVersion: v2
     appVersion: 0.1.0
+    created: "2022-08-17T16:37:33.513466412Z"
+    description: Chart to deploy Seldon Mock Model
+    digest: 8f5458cb2b03b96f404b1aa6819a6094055eba386bdc3f26fe24fe73c4ba9553
+    name: mock-model
+    type: application
+    urls:
+    - https://github.com/RafalSkolasinski/seldon-models/releases/download/mock-model-0.10.0/mock-model-0.10.0.tgz
+    version: 0.10.0
+  - apiVersion: v2
+    appVersion: 0.1.0
     created: "2022-07-21T14:34:49.154596315Z"
     description: Chart to deploy Seldon Mock Model
     digest: 99d6d1d53d7aaac3f3df7b1c5315fbd4b5fd264b5b269f27079a7f2b98bd55f1
@@ -91,4 +101,4 @@ entries:
     urls:
     - https://rafalskolasinski.github.io/seldon-models/mock-model-0.1.0.tgz
     version: 0.1.0
-generated: "2022-07-21T14:34:49.154627815Z"
+generated: "2022-08-17T16:37:33.513956439Z"
