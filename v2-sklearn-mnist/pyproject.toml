@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "v2-sklearn-mnist"
+version = "1.1.0"
+description = ""
+authors = ["Rafal Skolasinski <r.j.skolasinski@gmail.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+mlserver = "1.1.0"
+mlserver-sklearn = "1.1.0"
+
+[tool.poetry.dev-dependencies]
+black = "^22.6.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

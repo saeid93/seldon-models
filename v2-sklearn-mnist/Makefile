@@ -5,11 +5,15 @@ HTTP_SERVICE_PORT ?= 8080
 
 ############################ LOCAL TESTING ###############################
 
+
+install:
+	poetry install
+
 train:
-	python3 train.py
+	poetry run python3 train.py
 
 serve:
-	mlserver start .
+	poetry run mlserver start .
 
 local-rest:
 	curl -v -s -H 'Content-Type: application/json' \

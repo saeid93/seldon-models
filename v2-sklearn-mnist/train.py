@@ -26,4 +26,5 @@ classifier.fit(X_train, y_train)
 # Save model
 import joblib
 model_file_name = "mnist-svm.joblib"
+print(f"Saving model: {model_file_name}")
 joblib.dump(classifier, model_file_name)
