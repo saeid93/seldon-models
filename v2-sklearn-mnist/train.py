@@ -2,29 +2,33 @@
 # https://scikit-learn.org/stable/auto_examples/classification/plot_digits_classification.html
 
 # Import datasets, classifiers and performance metrics
-from sklearn import datasets, svm, metrics
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import FunctionTransformer
+from sklearn import datasets, svm
 from sklearn.model_selection import train_test_split
+import joblib
+
+
+from functools import partial
+import numpy as np
 
 # The digits dataset
 digits = datasets.load_digits()
 
-# To apply a classifier on this data, we need to flatten the image, to
-# turn the data in a (samples, feature) matrix:
-n_samples = len(digits.images)
-data = digits.images.reshape((n_samples, -1))
-
 # Create a classifier: a support vector classifier
+reshape = partial(np.reshape, newshape=(-1, 64))
 classifier = svm.SVC(gamma=0.001)
+pipe = Pipeline([("reshape", FunctionTransformer(reshape)), ("classifier", classifier)])
 
 # Split data into train and test subsets
 X_train, X_test, y_train, y_test = train_test_split(
-    data, digits.target, test_size=0.5, shuffle=False)
+    digits.images, digits.target, test_size=0.5, shuffle=False
+)
 
 # We learn the digits on the first half of the digits
-classifier.fit(X_train, y_train)
+pipe.fit(X_train, y_train)
 
 # Save model
-import joblib
 model_file_name = "mnist-svm.joblib"
 print(f"Saving model: {model_file_name}")
-joblib.dump(classifier, model_file_name)
+joblib.dump(pipe, model_file_name)

@@ -2,9 +2,7 @@ ISTIO_PORT ?= 8003
 HTTP_SERVICE_PORT ?= 8080
 
 
-
 ############################ LOCAL TESTING ###############################
-
 
 install:
 	poetry install
@@ -19,11 +17,6 @@ local-rest:
 	curl -v -s -H 'Content-Type: application/json' \
 		-d @request.json \
 		http://localhost:${HTTP_SERVICE_PORT}/v2/models/mnist-svm/versions/v0.1.0/infer | jq .
-
-
-
-
-
 
 
 ############################## K8s TESTING #################################
