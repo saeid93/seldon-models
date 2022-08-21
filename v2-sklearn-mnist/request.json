@@ -2,11 +2,7 @@
   "inputs": [
     {
       "name": "predict",
-      "shape": [
-        1,
-        8,
-        8
-      ],
+      "shape": [1, 8, 8],
       "datatype": "FP32",
       "data":  [
        [[ 0,  0,  5, 13,  9,  1,  0,  0],

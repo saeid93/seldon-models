@@ -53,7 +53,6 @@ local-metrics:
 	curl -s localhost:${METRICS_SERVICE_PORT}/metrics
 
 
-
 ##################### IMAGE BUILD / PUSH  / LOAD ###########################
 
 image:
@@ -75,7 +74,6 @@ docker-serve:
 
 
 ############################## K8s TESTING #################################
-
 
 deploy:
 	kubectl apply -f manifest.yaml

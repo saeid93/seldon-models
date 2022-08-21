@@ -32,6 +32,9 @@ deploy:
 remove:
 	kubectl delete -f manifest.yaml
 
+meta:
+	curl -s http://localhost:${ISTIO_PORT}/seldon/seldon/v2-sklearn-mnist/v2/models/mnist-svm | jq .
+
 rest:
 	curl -v -s -H 'Content-Type: application/json' \
 		-d @request.json \
