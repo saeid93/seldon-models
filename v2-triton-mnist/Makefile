@@ -1,4 +1,5 @@
 ISTIO_PORT ?= 8003
+LOG_VERBOSE ?= 0
 
 ############################ LOCAL TESTING ###############################
 
@@ -10,10 +11,19 @@ train:
 
 serve:
 	docker run --rm -p 8000:8000 -p 8001:8001 -p 8002:8002 \
-	-v ${PWD}/models-repository:/models nvcr.io/nvidia/tritonserver:21.08-py3 tritonserver --model-repository=/models
+	-v ${PWD}/models-repository:/models nvcr.io/nvidia/tritonserver:21.08-py3 tritonserver --model-repository=/models  --log-verbose ${LOG_VERBOSE}
+
+local-live:
+	curl -v http://localhost:8000/v2/health/live
+
+local-ready:
+	curl -v http://localhost:8000/v2/health/ready
 
 local-meta:
 	curl -s http://localhost:8000/v2/models/mnist | jq .
+
+local-config:
+	curl -s http://localhost:8000/v2/models/mnist/config | jq .
 
 local-rest:
 	curl -v -s -H 'Content-Type: application/json' \
