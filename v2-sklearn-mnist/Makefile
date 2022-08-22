@@ -1,5 +1,8 @@
+MLSERVER_DIR ?= ${HOME}/work/MLServer
+
 ISTIO_PORT ?= 8003
 HTTP_SERVICE_PORT ?= 8080
+GRPC_SERVICE_PORT ?= 8081
 
 
 ############################ LOCAL TESTING ###############################
@@ -13,10 +16,25 @@ train:
 serve:
 	poetry run mlserver start .
 
+local-live:
+	curl -v http://localhost:${HTTP_SERVICE_PORT}/v2/health/live
+
+local-ready:
+	curl -v http://localhost:${HTTP_SERVICE_PORT}/v2/health/ready
+
+local-meta:
+	curl -s http://localhost:${HTTP_SERVICE_PORT}/v2/models/mnist-svm | jq .
+
 local-rest:
 	curl -v -s -H 'Content-Type: application/json' \
 		-d @request.json \
 		http://localhost:${HTTP_SERVICE_PORT}/v2/models/mnist-svm/versions/v0.1.0/infer | jq .
+
+# # Not yet works...
+# local-grpc:
+# 	payload=`cat request.json` && \
+# 		cd ${MLSERVER_DIR}/proto && grpcurl -v -d $${payload} \
+# 		-plaintext -proto ./dataplane.proto 0.0.0.0:${GRPC_SERVICE_PORT} inference.GRPCInferenceService/ModelInfer
 
 
 ############################## K8s TESTING #################################

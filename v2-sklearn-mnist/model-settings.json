@@ -1,8 +1,23 @@
 {
     "name": "mnist-svm",
     "implementation": "mlserver_sklearn.SKLearnModel",
+    "platform": "mlserver_sklearn.SKLearnModel",
     "parameters": {
         "uri": "./mnist-svm.joblib",
         "version": "v0.1.0"
-    }
+    },
+    "inputs": [
+        {
+          "name": "input",
+          "datatype": "FP32",
+          "shape": [-1, 8, 8]
+        }
+    ],
+    "outputs": [
+        {
+            "name": "predict",
+            "datatype": "FP32",
+            "shape": [-1]
+        }
+    ]
 }
