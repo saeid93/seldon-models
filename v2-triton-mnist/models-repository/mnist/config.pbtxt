@@ -1,0 +1,22 @@
+name: "mnist"
+platform: "tensorflow_savedmodel"
+max_batch_size: 100
+dynamic_batching {
+  preferred_batch_size: [ 50 ]
+  max_queue_delay_microseconds: 100
+}
+instance_group [ { count: 5 } ]
+input [
+  {
+    name: "conv2d_input"
+    data_type: TYPE_FP32
+    dims: [ 28, 28, 1 ]
+  }
+]
+output [
+  {
+    name: "dense_1"
+    data_type: TYPE_FP32
+    dims: [ 10 ]
+  }
+]
