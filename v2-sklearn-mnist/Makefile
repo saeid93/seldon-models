@@ -27,14 +27,11 @@ local-meta:
 
 local-rest:
 	curl -v -s -H 'Content-Type: application/json' \
-		-d @request.json \
+		-d @request-rest.json \
 		http://localhost:${HTTP_SERVICE_PORT}/v2/models/mnist-svm/versions/v0.1.0/infer | jq .
 
-# # Not yet works...
-# local-grpc:
-# 	payload=`cat request.json` && \
-# 		cd ${MLSERVER_DIR}/proto && grpcurl -v -d $${payload} \
-# 		-plaintext -proto ./dataplane.proto 0.0.0.0:${GRPC_SERVICE_PORT} inference.GRPCInferenceService/ModelInfer
+local-grpc:
+	grpcurl -plaintext -d '@' -proto ./proto/dataplane.proto localhost:8081 inference.GRPCInferenceService/ModelInfer < ./request-grpc.json
 
 
 ############################## K8s TESTING #################################
