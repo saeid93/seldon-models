@@ -31,7 +31,8 @@ local-rest:
 		http://localhost:${HTTP_SERVICE_PORT}/v2/models/mnist-svm/versions/v0.1.0/infer | jq .
 
 local-grpc:
-	grpcurl -plaintext -d '@' -proto ./proto/dataplane.proto localhost:8081 inference.GRPCInferenceService/ModelInfer < ./request-grpc.json
+	cat request-grpc.json | grpcurl -d '@' -plaintext -proto ./proto/dataplane.proto \
+		localhost:8081 inference.GRPCInferenceService/ModelInfer
 
 
 ############################## K8s TESTING #################################
@@ -52,5 +53,10 @@ meta:
 
 rest:
 	curl -v -s -H 'Content-Type: application/json' \
-		-d @request.json \
+		-d @request-rest.json \
 		http://localhost:${ISTIO_PORT}/seldon/seldon/v2-sklearn-mnist/v2/models/infer | jq .
+
+grpc:
+	cat request-grpc.json | grpcurl -d '@' -plaintext -proto ./proto/dataplane.proto \
+		-rpc-header seldon:v2-sklearn-mnist -rpc-header namespace:seldon \
+		localhost:8003 inference.GRPCInferenceService/ModelInfer
