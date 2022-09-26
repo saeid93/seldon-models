@@ -4,6 +4,10 @@ ISTIO_PORT ?= 8003
 HTTP_SERVICE_PORT ?= 8080
 GRPC_SERVICE_PORT ?= 8081
 
+BATCH_WORKERS ?= 10
+BATCH_INPUT_FILE ?= "batch-input.txt"
+BATCH_OUTPUT_FILE ?= "batch-output.txt"
+
 
 ############################ LOCAL TESTING ###############################
 
@@ -15,6 +19,9 @@ train:
 
 serve:
 	poetry run mlserver start .
+
+prepare-batch:
+	python3 prepare-batch-input.py
 
 local-live:
 	curl -v http://localhost:${HTTP_SERVICE_PORT}/v2/health/live
@@ -33,6 +40,9 @@ local-rest:
 local-grpc:
 	cat request-grpc.json | grpcurl -d '@' -plaintext -proto ./proto/dataplane.proto \
 		localhost:8081 inference.GRPCInferenceService/ModelInfer
+
+local-batch:
+	mlserver infer -u localhost:${HTTP_SERVICE_PORT} -m mnist-svm -i ${BATCH_INPUT_FILE} -o ${BATCH_OUTPUT_FILE} -b false --workers ${BATCH_WORKERS}
 
 
 ############################## K8s TESTING #################################
@@ -59,4 +69,7 @@ rest:
 grpc:
 	cat request-grpc.json | grpcurl -d '@' -plaintext -proto ./proto/dataplane.proto \
 		-rpc-header seldon:v2-sklearn-mnist -rpc-header namespace:seldon \
-		localhost:8003 inference.GRPCInferenceService/ModelInfer
+		localhost:${ISTIO_PORT} inference.GRPCInferenceService/ModelInfer
+
+batch:
+	mlserver infer -u localhost:${ISTIO_PORT}/seldon/seldon/v2-sklearn-mnist -m mnist-svm -i ${BATCH_INPUT_FILE} -o ${BATCH_OUTPUT_FILE} -b false --workers ${BATCH_WORKERS}
