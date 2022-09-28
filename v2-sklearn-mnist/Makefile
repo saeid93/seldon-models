@@ -42,7 +42,7 @@ local-grpc:
 		localhost:8081 inference.GRPCInferenceService/ModelInfer
 
 local-batch:
-	mlserver infer -u localhost:${HTTP_SERVICE_PORT} -m mnist-svm -i ${BATCH_INPUT_FILE} -o ${BATCH_OUTPUT_FILE} -b false --workers ${BATCH_WORKERS}
+	mlserver infer -u localhost:${HTTP_SERVICE_PORT} -m mnist-svm -i ${BATCH_INPUT_FILE} -o ${BATCH_OUTPUT_FILE} --workers ${BATCH_WORKERS} -v
 
 
 ############################## K8s TESTING #################################
@@ -72,4 +72,4 @@ grpc:
 		localhost:${ISTIO_PORT} inference.GRPCInferenceService/ModelInfer
 
 batch:
-	mlserver infer -u localhost:${ISTIO_PORT}/seldon/seldon/v2-sklearn-mnist -m mnist-svm -i ${BATCH_INPUT_FILE} -o ${BATCH_OUTPUT_FILE} -b false --workers ${BATCH_WORKERS}
+	mlserver infer -u localhost:${ISTIO_PORT}/seldon/seldon/v2-sklearn-mnist -m mnist-svm -i ${BATCH_INPUT_FILE} -o ${BATCH_OUTPUT_FILE} --workers ${BATCH_WORKERS} -v

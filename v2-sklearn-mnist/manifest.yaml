@@ -13,3 +13,5 @@ spec:
       implementation: SKLEARN_SERVER
       modelUri: minio:v2-sklearn-mnist
       envSecretRefName: seldon-rclone-secret
+      logger:
+        mode: all

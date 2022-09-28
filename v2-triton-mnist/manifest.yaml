@@ -15,3 +15,26 @@ spec:
       implementation: TRITON_SERVER
       modelUri: minio:triton-models/mnist-model
       envSecretRefName: seldon-rclone-secret
+
+
+---
+
+apiVersion: machinelearning.seldon.io/v1
+kind: SeldonDeployment
+metadata:
+  name: v2-triton-mnist-executor
+  namespace: seldon
+spec:
+  protocol: v2
+  predictors:
+  - name: default
+    annotations:
+      seldon.io/no-engine: "false"
+    replicas: 1
+    graph:
+      name: mnist
+      implementation: TRITON_SERVER
+      modelUri: minio:triton-models/mnist-model
+      envSecretRefName: seldon-rclone-secret
+      logger:
+        mode: all

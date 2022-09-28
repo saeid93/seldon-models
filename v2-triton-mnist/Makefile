@@ -4,7 +4,7 @@ ISTIO_PORT ?= 8003
 HTTP_SERVICE_PORT ?= 8000
 
 BATCH_WORKERS ?= 10
-BATCH_BINARY_PAYLOADS ?= true
+BATCH_BINARY_DATA ?= true
 BATCH_INPUT_FILE ?= "batch-input.txt"
 BATCH_OUTPUT_FILE ?= "batch-output.txt"
 
@@ -42,7 +42,7 @@ local-rest:
 		http://localhost:${HTTP_SERVICE_PORT}/v2/models/mnist/infer | jq .
 
 local-batch:
-	mlserver infer -u localhost:${HTTP_SERVICE_PORT} -m mnist -i ${BATCH_INPUT_FILE} -o ${BATCH_OUTPUT_FILE} -b ${BATCH_BINARY_PAYLOADS} --workers ${BATCH_WORKERS}
+	MLSERVER_INFER_BINARY_DATA=${BATCH_BINARY_DATA} mlserver infer -u localhost:${HTTP_SERVICE_PORT} -m mnist -i ${BATCH_INPUT_FILE} -o ${BATCH_OUTPUT_FILE} --workers ${BATCH_WORKERS} -v
 
 
 ############################## K8s TESTING #################################
@@ -65,4 +65,4 @@ rest:
 		http://localhost:${ISTIO_PORT}/seldon/seldon/v2-triton-mnist/v2/models/mnist/infer | jq .
 
 batch:
-	mlserver infer -u localhost:${ISTIO_PORT}/seldon/seldon/v2-triton-mnist -m mnist -i ${BATCH_INPUT_FILE} -o ${BATCH_OUTPUT_FILE} -b ${BATCH_BINARY_PAYLOADS} --workers ${BATCH_WORKERS}
+	MLSERVER_INFER_BINARY_DATA=${BATCH_BINARY_DATA} mlserver infer -u localhost:${ISTIO_PORT}/seldon/seldon/v2-triton-mnist -m mnist -i ${BATCH_INPUT_FILE} -o ${BATCH_OUTPUT_FILE} --workers ${BATCH_WORKERS} -v
