@@ -14,7 +14,7 @@ def get_payload(shape, input_name="conv2d_input", datatype="FP32"):
                 "shape": data.shape,
             }
         ],
-        "outputs": [{"name": "dense_1", "parameters": {"binary_data": False}}],
+        "outputs": [{"name": "dense_1"}],
     }
 
 

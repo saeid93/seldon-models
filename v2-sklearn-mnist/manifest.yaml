@@ -12,6 +12,6 @@ spec:
       name: mnist-svm
       implementation: SKLEARN_SERVER
       modelUri: minio:v2-sklearn-mnist
-      envSecretRefName: seldon-rclone-secret
+      envSecretRefName: minio-bucket
       logger:
         mode: all

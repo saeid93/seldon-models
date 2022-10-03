@@ -3,7 +3,7 @@ import numpy as np
 import orjson
 
 
-def get_payload(shape, input_name="predict", datatype="FP32"):
+def get_payload(shape, input_name="input", datatype="FP32"):
     data = np.random.rand(*shape)
     return {
         "inputs": [

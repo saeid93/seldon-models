@@ -93,3 +93,6 @@ grpc:
 		-rpc-header seldon:seldon-mock-model -rpc-header namespace:seldon \
 		-plaintext -proto ./prediction.proto \
 		0.0.0.0:8003 seldon.protos.Seldon/Predict
+
+metrics:
+	curl -v -s http://localhost:${ISTIO_PORT}/seldon/seldon/seldon-mock-model/prometheus

@@ -14,7 +14,7 @@ spec:
       name: mnist
       implementation: TRITON_SERVER
       modelUri: minio:triton-models/mnist-model
-      envSecretRefName: seldon-rclone-secret
+      envSecretRefName: minio-bucket
 
 
 ---
@@ -35,6 +35,6 @@ spec:
       name: mnist
       implementation: TRITON_SERVER
       modelUri: minio:triton-models/mnist-model
-      envSecretRefName: seldon-rclone-secret
+      envSecretRefName: minio-bucket
       logger:
         mode: all
