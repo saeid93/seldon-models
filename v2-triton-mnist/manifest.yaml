@@ -7,34 +7,39 @@ spec:
   protocol: v2
   predictors:
   - name: default
-    annotations:
-      seldon.io/no-engine: "true"
     replicas: 1
     graph:
       name: mnist
       implementation: TRITON_SERVER
       modelUri: minio:triton-models/mnist-model
       envSecretRefName: minio-bucket
+    componentSpecs:
+    - spec:
+        containers:
+        - name: mnist
+          env:
+          - name: LOG_VERBOSE
+            value: "1"
 
 
----
+# ---
 
-apiVersion: machinelearning.seldon.io/v1
-kind: SeldonDeployment
-metadata:
-  name: v2-triton-mnist-executor
-  namespace: seldon
-spec:
-  protocol: v2
-  predictors:
-  - name: default
-    annotations:
-      seldon.io/no-engine: "false"
-    replicas: 1
-    graph:
-      name: mnist
-      implementation: TRITON_SERVER
-      modelUri: minio:triton-models/mnist-model
-      envSecretRefName: minio-bucket
-      logger:
-        mode: all
+# apiVersion: machinelearning.seldon.io/v1
+# kind: SeldonDeployment
+# metadata:
+#   name: v2-triton-mnist-no-executor
+#   namespace: seldon
+# spec:
+#   protocol: v2
+#   predictors:
+#   - name: default
+#     annotations:
+#       seldon.io/no-engine: "true"
+#     replicas: 1
+#     graph:
+#       name: mnist
+#       implementation: TRITON_SERVER
+#       modelUri: minio:triton-models/mnist-model
+#       envSecretRefName: minio-bucket
+#       logger:
+#         mode: all
