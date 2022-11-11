@@ -1,0 +1,17 @@
+apiVersion: machinelearning.seldon.io/v1
+kind: SeldonDeployment
+metadata:
+  name: v2-xgboost-iris
+  namespace: seldon
+spec:
+  protocol: v2
+  predictors:
+  - name: default
+    replicas: 1
+    graph:
+      name: classifier
+      implementation: XGBOOST_SERVER
+      modelUri: gs://seldon-models/xgboost/iris
+      envSecretRefName: minio-bucket
+      logger:
+        mode: all

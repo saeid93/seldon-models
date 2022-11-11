@@ -1,0 +1,18 @@
+{
+    "inputs": [
+      {
+        "name": "predict",
+        "shape": [2, 4],
+        "datatype": "FP32",
+        "data":  [
+            [1, 2, 3, 4],
+            [2, 3, 4, 5]
+        ]
+      }
+    ],
+    "outputs": [
+      {
+        "name": "predict"
+      }
+    ]
+  }

@@ -1,0 +1,17 @@
+apiVersion: machinelearning.seldon.io/v1
+kind: SeldonDeployment
+metadata:
+  name: v2-sklearn-iris
+  namespace: seldon
+spec:
+  protocol: v2
+  predictors:
+  - name: default
+    replicas: 1
+    graph:
+      name: classifier
+      implementation: SKLEARN_SERVER
+      modelUri: gs://seldon-models/v1.14.1/sklearn/iris
+      envSecretRefName: minio-bucket
+      logger:
+        mode: all
