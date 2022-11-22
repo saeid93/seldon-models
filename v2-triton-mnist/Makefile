@@ -18,7 +18,7 @@ train:
 	poetry run python3 train.py
 
 prepare-batch:
-	python3 prepare-batch-input.py
+	poetry run python3 prepare-batch-input.py
 
 serve:
 	docker run --rm -p ${HTTP_SERVICE_PORT}:8000 -p 8001:8001 -p 8002:8002 \
@@ -65,4 +65,4 @@ rest:
 		http://localhost:${ISTIO_PORT}/seldon/seldon/v2-triton-mnist/v2/models/mnist/infer | jq .
 
 batch:
-	MLSERVER_INFER_BINARY_DATA=${BATCH_BINARY_DATA} mlserver infer -u localhost:${ISTIO_PORT}/seldon/seldon/v2-triton-mnist -m mnist -i ${BATCH_INPUT_FILE} -o ${BATCH_OUTPUT_FILE} --workers ${BATCH_WORKERS} -v
+	MLSERVER_INFER_BINARY_DATA=${BATCH_BINARY_DATA} mlserver infer -u localhost:${ISTIO_PORT}/seldon/seldon/v2-triton-mnist -m mnist -i ${BATCH_INPUT_FILE} -o ${BATCH_OUTPUT_FILE} --workers ${BATCH_WORKERS}

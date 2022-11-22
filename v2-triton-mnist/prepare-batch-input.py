@@ -19,7 +19,7 @@ def get_payload(shape, input_name="conv2d_input", datatype="FP32"):
 
 
 @click.command()
-@click.option("--batch-size", "-b", default=10, type=int)
+@click.option("--batch-size", "-b", default=1, type=int)
 @click.option("--instances", "-i", default=500, type=int)
 @click.option("--file-name", "-f", default="batch-input.txt", type=str)
 def cli(batch_size, instances, file_name):

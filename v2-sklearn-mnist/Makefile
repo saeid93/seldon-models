@@ -72,4 +72,4 @@ grpc:
 		localhost:${ISTIO_PORT} inference.GRPCInferenceService/ModelInfer
 
 batch:
-	mlserver infer -u localhost:${ISTIO_PORT}/seldon/seldon/v2-sklearn-mnist -m mnist-svm -i ${BATCH_INPUT_FILE} -o ${BATCH_OUTPUT_FILE} --workers ${BATCH_WORKERS} -v
+	mlserver infer -u localhost:${ISTIO_PORT}/seldon/seldon/v2-sklearn-mnist -m mnist-svm -i ${BATCH_INPUT_FILE} -o ${BATCH_OUTPUT_FILE} --workers ${BATCH_WORKERS}

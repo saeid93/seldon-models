@@ -1,0 +1,14 @@
+{
+    "model_name": "classiier",
+    "inputs": [
+      {
+        "name": "predict",
+        "datatype": "FP32",
+        "shape": [2, 4],
+        "contents": { "int_contents": [1, 2, 3, 4, 2, 3, 4, 5] },
+        "parameters": {
+          "content_type": { "string_param": "np" }
+        }
+      }
+    ]
+  }
