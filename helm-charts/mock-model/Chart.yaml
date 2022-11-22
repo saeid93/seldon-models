@@ -3,5 +3,5 @@ name: mock-model
 description: Chart to deploy Seldon Mock Model
 
 type: application
-version: 0.10.0
-appVersion: 0.10.0
+version: 0.11.0
+appVersion: 0.11.0
