@@ -119,7 +119,7 @@ entries:
     name: mock-model
     type: application
     urls:
-    - https://rafalskolasinski.github.io/seldon-models/mock-model-0.2.0.tgz
+    - https://rafalskolasinski.github.io/seldon-models/resources/mock-model-0.2.0.tgz
     version: 0.2.0
   - apiVersion: v2
     appVersion: 0.1.0
@@ -129,6 +129,6 @@ entries:
     name: mock-model
     type: application
     urls:
-    - https://rafalskolasinski.github.io/seldon-models/mock-model-0.1.0.tgz
+    - https://rafalskolasinski.github.io/seldon-models/resources/mock-model-0.1.0.tgz
     version: 0.1.0
 generated: "2022-11-23T10:32:08.762719615Z"
