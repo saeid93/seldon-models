@@ -1,5 +1,5 @@
 {
-    "model_name": "classiier",
+    "model_name": "classifier",
     "inputs": [
       {
         "name": "predict",
